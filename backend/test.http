@@ -1,0 +1,33 @@
+POST http://127.0.0.1:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "kamlesh",
+    "email": "kamlesh@example.com",
+    "password": "Test@12345"
+}
+
+### Test Login with Username
+POST http://127.0.0.1:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "identifier": "kamlesh",
+    "password": "Test@12345"
+}
+
+### Test Login with Email
+POST http://127.0.0.1:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "identifier": "kamlesh@example.com",
+    "password": "Test@12345"
+}
+
+### 6.3 Test Protected Route Without Token
+GET http://127.0.0.1:5000/api/auth/me
+
+### 6.4 Test Protected Route With Token
+GET http://127.0.0.1:5000/api/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
