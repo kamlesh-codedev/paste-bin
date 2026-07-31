@@ -5,6 +5,7 @@ from app.extensions import db, migrate, jwt, cors
 from app.models import User, Paste
 
 
+
 def create_app(config_class=Config):
     """Application factory."""
 
@@ -28,11 +29,12 @@ def create_app(config_class=Config):
     )
 
     # Register blueprints
-    # Register blueprints
     from app.routes.health import health_bp
     from app.routes.auth import auth_bp
+    from app.routes.pastes import pastes_bp
 
     app.register_blueprint(health_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(pastes_bp)
 
     return app

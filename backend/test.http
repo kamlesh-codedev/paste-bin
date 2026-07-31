@@ -31,3 +31,156 @@ GET http://127.0.0.1:5000/api/auth/me
 ### 6.4 Test Protected Route With Token
 GET http://127.0.0.1:5000/api/auth/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+### 1. Create
+POST http://127.0.0.1:5000/api/pastes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+{
+    "title": "My First Python Paste",
+    "content": "def hello_world():\n    print('Hello, Kamlesh!')\n\nhello_world()",
+    "language": "python",
+    "visibility": "public"
+}
+
+### 2. List
+GET http://127.0.0.1:5000/api/pastes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+### 3. Retrieve
+GET http://127.0.0.1:5000/api/pastes/a13b2a96-4d0b-4137-81f2-0661018dcc70
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+### 4. Update
+PUT http://127.0.0.1:5000/api/pastes/a13b2a96-4d0b-4137-81f2-0661018dcc70
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+{
+    "title": "My Updated Python Paste",
+    "content": "def hello_world():\n    print('Hello, Kamlesh! This is updated.')\n\nhello_world()",
+    "language": "python",
+    "visibility": "public"
+}
+
+### 5. Public View (Paste is already public)
+GET http://127.0.0.1:5000/api/pastes/public/a13b2a96-4d0b-4137-81f2-0661018dcc70
+
+### 6a. Change Visibility to Private
+PUT http://127.0.0.1:5000/api/pastes/a13b2a96-4d0b-4137-81f2-0661018dcc70
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+{
+    "visibility": "private"
+}
+
+### 6b. Private View (Test Public Access Again)
+GET http://127.0.0.1:5000/api/pastes/public/a13b2a96-4d0b-4137-81f2-0661018dcc70
+
+### 7. Delete
+DELETE http://127.0.0.1:5000/api/pastes/a13b2a96-4d0b-4137-81f2-0661018dcc70
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+### 8a. Create User B (The "Hacker")
+POST http://127.0.0.1:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "hacker",
+    "email": "hacker@example.com",
+    "password": "Password123"
+}
+
+### 8b. Login User B (Get Hacker's Token)
+POST http://127.0.0.1:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "identifier": "hacker",
+    "password": "Password123"
+}
+
+### 8c. User A creates a new paste
+POST http://127.0.0.1:5000/api/pastes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNjIwOCwianRpIjoiZGQ0NDBjNDctOTJiMy00ZDhlLWI4MGUtNmQ2N2UwODYzZWI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3ODU0MjYyMDgsImNzcmYiOiI1MmZkMjQ5Ni1mYWUzLTRhZGItYjA3Yy05NGIzMzFlOWViYTQifQ.mCYBmIVaaGD2COgzfyZL2__pQkMNLh59i8W8dYbc7YA
+
+{
+    "title": "User A Secret Paste",
+    "content": "Only User A can edit or delete this.",
+    "language": "plaintext"
+}
+
+### 8d. Hacker tries to UPDATE User A's paste (Should be 403 Forbidden)
+PUT http://127.0.0.1:5000/api/pastes/638f7d0f-e800-43e1-bec5-066891765c92
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+{
+    "title": "Hacked Title!"
+}
+
+### 8e. Hacker tries to DELETE User A's paste (Should be 403 Forbidden)
+DELETE http://127.0.0.1:5000/api/pastes/638f7d0f-e800-43e1-bec5-066891765c92
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+
+
+
+### Test Pagination - Default
+GET http://127.0.0.1:5000/api/pastes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+
+### Test Pagination - Page 1, Limit 2
+GET http://127.0.0.1:5000/api/pastes?page=1&per_page=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+### Test Pagination - Page 2, Limit 2
+GET http://127.0.0.1:5000/api/pastes?page=2&per_page=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+### Test Pagination - Invalid Page Type (Should be 400)
+GET http://127.0.0.1:5000/api/pastes?page=abc&per_page=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+### Test Pagination - Limit Exceeded (Should be 400)
+GET http://127.0.0.1:5000/api/pastes?page=1&per_page=101
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+
+
+### Test Expiration - Future Paste
+POST http://127.0.0.1:5000/api/pastes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+{
+    "title": "Temporary Paste",
+    "content": "This will expire",
+    "language": "text",
+    "visibility": "public",
+    "expires_at": "2026-08-01T12:00:00+00:00"
+}
+
+### Test Expiration - Verify Future Paste (Should be 200 OK)
+GET http://127.0.0.1:5000/api/pastes/public/0367acb4-2dad-4a1e-aed6-5ff7eb131edc
+
+### Test Expiration - Past Paste
+POST http://127.0.0.1:5000/api/pastes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NTQyNzY2NSwianRpIjoiZjNkOTI0OGEtNDk1Ni00NWNmLTg0ZTQtNTk1MmJhZjRjNDZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3ODU0Mjc2NjUsImNzcmYiOiI5MTY1MzQ1Zi00OGFlLTRmZDUtYjViMy0yYjVhNDZmNWNmYTEifQ.FjMsNbMLzjGP32jA08jHRVpCNQ6FyXBYvmZfGoSPsbk
+
+{
+    "title": "Expired Paste",
+    "content": "This has expired",
+    "language": "text",
+    "visibility": "public",
+    "expires_at": "2020-01-01T00:00:00+00:00"
+}
+
+### Test Expiration - Verify Expired Paste (Should be 410 Gone)
+### Test Expiration - Verify Expired Paste (Should be 410 Gone)
+GET http://127.0.0.1:5000/api/pastes/public/d6430c35-0b80-4547-993d-be45fa58907a
