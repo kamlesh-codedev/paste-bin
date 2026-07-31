@@ -20,12 +20,15 @@ def create_app(config_class=Config):
     jwt.init_app(app)
 
     cors.init_app(
-        app,
-        resources={
-            r"/api/*": {
-                "origins": "*"
-            }
+    app,
+    resources={
+        r"/api/*": {
+            "origins": [
+                "http://localhost:5173",
+                "https://paste-bin-frontend-k2rl.onrender.com"
+            ]
         }
+    }
     )
 
     # Register blueprints
