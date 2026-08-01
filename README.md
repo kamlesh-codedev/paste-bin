@@ -985,6 +985,15 @@ Introduce a formal OpenAPI specification and interactive Swagger UI for machine-
 - [API Documentation](docs/API_DOCUMENTATION.md)
 - [System Architecture](docs/ARCHITECTURE.md)
 
+## 🚀 Live Deployment
+
+The application is fully deployed and accessible online. 
+
+* **Frontend (Live App):** [https://paste-bin-frontend-k2rl.onrender.com](https://paste-bin-frontend-k2rl.onrender.com)
+* **Backend API:** [https://paste-bin-1.onrender.com](https://paste-bin-1.onrender.com)
+
+> **Note:** Because this project uses Render's free tier, the backend API may take 50 seconds to spin up if it has been inactive.
+
 # Project Status
 
 **Status: Complete — Core Technical Challenge Requirements Implemented**
