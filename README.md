@@ -680,7 +680,7 @@ These scenarios validate the core API behavior across authentication, CRUD opera
 
 For complete request examples and API workflows, see:
 
-👉 **[API Documentation](docs/API_DOCUMENTATION.md)**
+👉 **[API Documentation](https://github.com/kamlesh-codedev/paste-bin/blob/main/docks/API_DOCUMENTATION.md)**
 
 ---
 
@@ -982,8 +982,8 @@ Introduce a formal OpenAPI specification and interactive Swagger UI for machine-
 
 ## Documentation
 
-- [API Documentation](docs/API_DOCUMENTATION.md)
-- [System Architecture](docs/ARCHITECTURE.md)
+- [API Documentation](https://github.com/kamlesh-codedev/paste-bin/blob/main/docks/API_DOCUMENTATION.md)
+- [System Architecture](https://github.com/kamlesh-codedev/paste-bin/blob/main/docks/ARCHITECTURE.md)
 
 ## 🚀 Live Deployment
 
