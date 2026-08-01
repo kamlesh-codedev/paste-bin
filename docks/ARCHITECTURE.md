@@ -24,23 +24,23 @@ The architecture separates presentation, API, business logic, data access, and p
 ```mermaid
 flowchart TD
 
-    U[User / Client Browser]
+    U["User / Client Browser"]
 
-    F[React Frontend<br/>Vite<br/>Port 5173]
+    F["React Frontend\nVite\nPort 5173"]
 
-    API[Flask REST API<br/>Port 5000]
+    API["Flask REST API\nPort 5000"]
 
-    AUTH[JWT Authentication<br/>Authorization]
+    AUTH["JWT Authentication\nAuthorization"]
 
-    BL[Application Logic<br/>Validation & Access Control]
+    BL["Application Logic\nValidation & Access Control"]
 
-    ORM[SQLAlchemy ORM]
+    ORM["SQLAlchemy ORM"]
 
-    DB[(PostgreSQL Database<br/>Port 5432)]
+    DB[("PostgreSQL Database\nPort 5432")]
 
-    MIG[Flask-Migrate<br/>Alembic]
+    MIG["Flask-Migrate\nAlembic"]
 
-    VOL[(Persistent Docker Volume)]
+    VOL[("Persistent Docker Volume")]
 
     U -->|HTTP / HTTPS| F
 
@@ -57,7 +57,7 @@ flowchart TD
     MIG -->|Schema Migrations| DB
 
     DB --> VOL
-```
+````
 
 ---
 
@@ -68,41 +68,41 @@ The system is divided into the following major components:
 ```mermaid
 flowchart LR
 
-    subgraph Client Layer
-        A[User Browser]
+    subgraph Client_Layer
+        A["User Browser"]
     end
 
-    subgraph Presentation Layer
-        B[React Application]
-        C[Vite Development Server]
+    subgraph Presentation_Layer
+        B["React Application"]
+        C["Vite Development Server"]
     end
 
-    subgraph Application Layer
-        D[Flask REST API]
-        E[Route / Controller Layer]
-        F[Authentication & Authorization]
-        G[Business Logic]
-        H[Validation]
+    subgraph Application_Layer
+        D["Flask REST API"]
+        E["Route / Controller Layer"]
+        F["Authentication & Authorization"]
+        G["Business Logic"]
+        H["Validation"]
     end
 
-    subgraph Data Access Layer
-        I[SQLAlchemy ORM]
-        J[Application Models]
+    subgraph Data_Access_Layer
+        I["SQLAlchemy ORM"]
+        J["Application Models"]
     end
 
-    subgraph Persistence Layer
-        K[(PostgreSQL)]
+    subgraph Persistence_Layer
+        K[("PostgreSQL")]
     end
 
-    subgraph Infrastructure Layer
-        L[Docker]
-        M[Docker Compose]
-        N[Persistent Volume]
+    subgraph Infrastructure_Layer
+        L["Docker"]
+        M["Docker Compose"]
+        N["Persistent Volume"]
     end
 
-    subgraph CI Layer
-        O[GitHub Actions]
-        P[Pytest]
+    subgraph CI_Layer
+        O["GitHub Actions"]
+        P["Pytest"]
     end
 
     A --> B
@@ -153,7 +153,7 @@ sequenceDiagram
 
     alt Protected Endpoint
         Auth-->>API: Token Valid
-    else Invalid / Missing Token
+    else Invalid or Missing Token
         Auth-->>API: Unauthorized
         API-->>Frontend: 401 Unauthorized
     end
@@ -198,8 +198,7 @@ sequenceDiagram
 
     Frontend->>Frontend: Store Authentication State
 
-    Frontend->>API: Protected API Request<br/>Authorization: Bearer JWT
-
+    Frontend->>API: Protected API Request
     API->>API: Validate JWT
 
     API-->>Frontend: Authorized Response
@@ -289,25 +288,25 @@ sequenceDiagram
 ```mermaid
 flowchart TD
 
-    A[User Requests Paste] --> B[React Frontend]
+    A["User Requests Paste"] --> B["React Frontend"]
 
-    B --> C[GET /api/pastes/{paste_id}]
+    B --> C["GET /api/pastes/{paste_id}"]
 
-    C --> D{JWT Valid?}
+    C --> D{"JWT Valid?"}
 
-    D -->|No| E[401 Unauthorized]
+    D -->|No| E["401 Unauthorized"]
 
-    D -->|Yes| F[Find Paste]
+    D -->|Yes| F["Find Paste"]
 
-    F --> G{Paste Exists?}
+    F --> G{"Paste Exists?"}
 
-    G -->|No| H[Resource Not Found]
+    G -->|No| H["Resource Not Found"]
 
-    G -->|Yes| I[Return Paste]
+    G -->|Yes| I["Return Paste"]
 
-    I --> J[React Frontend]
+    I --> J["React Frontend"]
 
-    J --> K[Display Paste]
+    J --> K["Display Paste"]
 ```
 
 ---
@@ -319,29 +318,29 @@ Public pastes can be accessed through a dedicated public endpoint.
 ```mermaid
 flowchart TD
 
-    A[User Creates Paste]
+    A["User Creates Paste"]
 
-    A --> B{Visibility}
+    A --> B{"Visibility"}
 
-    B -->|Public| C[Generate Shareable Paste ID]
+    B -->|Public| C["Generate Shareable Paste ID"]
 
-    C --> D[Public URL]
+    C --> D["Public URL"]
 
-    D --> E[GET /api/pastes/public/{paste_id}]
+    D --> E["GET /api/pastes/public/{paste_id}"]
 
-    E --> F{Paste Exists?}
+    E --> F{"Paste Exists?"}
 
-    F -->|No| G[Not Found]
+    F -->|No| G["Not Found"]
 
-    F -->|Yes| H{Expired?}
+    F -->|Yes| H{"Expired?"}
 
-    H -->|Yes| I[410 Gone]
+    H -->|Yes| I["410 Gone"]
 
-    H -->|No| J{Visibility Public?}
+    H -->|No| J{"Visibility Public?"}
 
-    J -->|No| K[Public Access Denied]
+    J -->|No| K["Public Access Denied"]
 
-    J -->|Yes| L[Return Public Paste]
+    J -->|Yes| L["Return Public Paste"]
 ```
 
 ---
@@ -353,25 +352,25 @@ Private pastes are protected from public access.
 ```mermaid
 flowchart TD
 
-    A[Request Public Paste]
+    A["Request Public Paste"]
 
-    A --> B[GET /api/pastes/public/{paste_id}]
+    A --> B["GET /api/pastes/public/{paste_id}"]
 
-    B --> C[Find Paste]
+    B --> C["Find Paste"]
 
-    C --> D{Visibility}
+    C --> D{"Visibility"}
 
-    D -->|Public| E[Continue]
+    D -->|Public| E["Continue"]
 
-    D -->|Private| F[Reject Public Access]
+    D -->|Private| F["Reject Public Access"]
 
-    E --> G{Expired?}
+    E --> G{"Expired?"}
 
-    G -->|No| H[Return Paste]
+    G -->|No| H["Return Paste"]
 
-    G -->|Yes| I[410 Gone]
+    G -->|Yes| I["410 Gone"]
 
-    F --> J[Access Denied]
+    F --> J["Access Denied"]
 ```
 
 The visibility state controls whether a paste can be accessed through the public sharing endpoint.
@@ -387,21 +386,21 @@ The ownership check follows this model:
 ```mermaid
 flowchart TD
 
-    A[Authenticated User]
+    A["Authenticated User"]
 
-    A --> B[Request Update / Delete]
+    A --> B["Request Update / Delete"]
 
-    B --> C[Validate JWT]
+    B --> C["Validate JWT"]
 
-    C --> D[Retrieve Paste]
+    C --> D["Retrieve Paste"]
 
-    D --> E[Compare User ID]
+    D --> E["Compare User ID"]
 
-    E --> F{User Owns Paste?}
+    E --> F{"User Owns Paste?"}
 
-    F -->|Yes| G[Allow Operation]
+    F -->|Yes| G["Allow Operation"]
 
-    F -->|No| H[403 Forbidden]
+    F -->|No| H["403 Forbidden"]
 ```
 
 ### Authorization Rule
@@ -434,23 +433,23 @@ Paste expiration is handled using an expiration timestamp.
 ```mermaid
 flowchart TD
 
-    A[Create Paste]
+    A["Create Paste"]
 
-    A --> B{expires_at provided?}
+    A --> B{"expires_at provided?"}
 
-    B -->|No| C[Paste Does Not Expire]
+    B -->|No| C["Paste Does Not Expire"]
 
-    B -->|Yes| D[Store Expiration Timestamp]
+    B -->|Yes| D["Store Expiration Timestamp"]
 
-    D --> E[Public Paste Request]
+    D --> E["Public Paste Request"]
 
-    E --> F{Current Time >= expires_at?}
+    E --> F{"Current Time >= expires_at?"}
 
-    F -->|No| G[Paste Still Available]
+    F -->|No| G["Paste Still Available"]
 
-    F -->|Yes| H[Paste Expired]
+    F -->|Yes| H["Paste Expired"]
 
-    H --> I[Return 410 Gone]
+    H --> I["Return 410 Gone"]
 ```
 
 ### Expiration States
@@ -478,25 +477,25 @@ The request flow is:
 ```mermaid
 flowchart TD
 
-    A[GET /api/pastes] --> B[Read Query Parameters]
+    A["GET /api/pastes"] --> B["Read Query Parameters"]
 
-    B --> C[Validate page]
+    B --> C["Validate page"]
 
-    C --> D{Valid?}
+    C --> D{"Valid?"}
 
-    D -->|No| E[400 Bad Request]
+    D -->|No| E["400 Bad Request"]
 
-    D -->|Yes| F[Validate per_page]
+    D -->|Yes| F["Validate per_page"]
 
-    F --> G{Valid?}
+    F --> G{"Valid?"}
 
-    G -->|No| H[400 Bad Request]
+    G -->|No| H["400 Bad Request"]
 
-    G -->|Yes| I[Apply Pagination]
+    G -->|Yes| I["Apply Pagination"]
 
-    I --> J[Query PostgreSQL]
+    I --> J["Query PostgreSQL"]
 
-    J --> K[Return Paginated Results]
+    J --> K["Return Paginated Results"]
 ```
 
 Pagination reduces the amount of data returned by a single request and improves API performance when users have many pastes.
@@ -512,17 +511,17 @@ SQLAlchemy provides the ORM layer between the Flask application and PostgreSQL.
 ```mermaid
 flowchart TD
 
-    A[Flask REST API]
+    A["Flask REST API"]
 
-    A --> B[Application Models]
+    A --> B["Application Models"]
 
-    B --> C[SQLAlchemy ORM]
+    B --> C["SQLAlchemy ORM"]
 
-    C --> D[Database Connection]
+    C --> D["Database Connection"]
 
-    D --> E[(PostgreSQL)]
+    D --> E[("PostgreSQL")]
 
-    E --> F[Persistent Docker Volume]
+    E --> F["Persistent Docker Volume"]
 ```
 
 ### Database Responsibilities
@@ -549,17 +548,17 @@ Database schema changes are managed through Flask-Migrate and Alembic.
 ```mermaid
 flowchart LR
 
-    A[Modify SQLAlchemy Model]
+    A["Modify SQLAlchemy Model"]
 
-    A --> B[flask db migrate]
+    A --> B["flask db migrate"]
 
-    B --> C[Generate Migration Script]
+    B --> C["Generate Migration Script"]
 
-    C --> D[Review Migration]
+    C --> D["Review Migration"]
 
-    D --> E[flask db upgrade]
+    D --> E["flask db upgrade"]
 
-    E --> F[(PostgreSQL Database)]
+    E --> F[("PostgreSQL Database")]
 ```
 
 ### Migration Workflow
@@ -595,19 +594,19 @@ PasteVault runs as a multi-container application using Docker Compose.
 ```mermaid
 flowchart TD
 
-    subgraph Docker Compose
+    subgraph Docker_Compose
 
-        F[Frontend Container<br/>React / Vite<br/>Port 5173]
+        F["Frontend Container\nReact / Vite\nPort 5173"]
 
-        B[Backend Container<br/>Flask API<br/>Port 5000]
+        B["Backend Container\nFlask API\nPort 5000"]
 
-        DB[Database Container<br/>PostgreSQL<br/>Port 5432]
+        DB["Database Container\nPostgreSQL\nPort 5432"]
 
-        V[(PostgreSQL Named Volume)]
+        V[("PostgreSQL Named Volume")]
 
     end
 
-    User[User Browser]
+    User["User Browser"]
 
     User -->|HTTP| F
 
@@ -642,23 +641,23 @@ the environment is initialized as follows:
 ```mermaid
 flowchart TD
 
-    A[docker compose up --build]
+    A["docker compose up --build"]
 
-    A --> B[Build Frontend Image]
+    A --> B["Build Frontend Image"]
 
-    A --> C[Build Backend Image]
+    A --> C["Build Backend Image"]
 
-    A --> D[Start PostgreSQL Container]
+    A --> D["Start PostgreSQL Container"]
 
-    D --> E[Initialize / Mount Database Volume]
+    D --> E["Initialize / Mount Database Volume"]
 
-    B --> F[Start Frontend]
+    B --> F["Start Frontend"]
 
-    C --> G[Start Flask Backend]
+    C --> G["Start Flask Backend"]
 
-    G --> H[Connect to PostgreSQL]
+    G --> H["Connect to PostgreSQL"]
 
-    H --> I[Application Ready]
+    H --> I["Application Ready"]
 
     F --> I
 ```
@@ -672,19 +671,19 @@ The health endpoint provides a simple mechanism to verify application availabili
 ```mermaid
 flowchart TD
 
-    A[Monitoring System / User]
+    A["Monitoring System / User"]
 
-    A --> B[GET /api/health]
+    A --> B["GET /api/health"]
 
-    B --> C[Flask API]
+    B --> C["Flask API"]
 
-    C --> D[Check Database Connectivity]
+    C --> D["Check Database Connectivity"]
 
-    D --> E{Database Available?}
+    D --> E{"Database Available?"}
 
-    E -->|Yes| F[Return Healthy Response]
+    E -->|Yes| F["Return Healthy Response"]
 
-    E -->|No| G[Return Database Failure]
+    E -->|No| G["Return Database Failure"]
 ```
 
 Example healthy response:
@@ -706,25 +705,25 @@ PasteVault uses Pytest for backend automated testing.
 ```mermaid
 flowchart LR
 
-    A[Developer / CI Pipeline]
+    A["Developer / CI Pipeline"]
 
-    A --> B[Pytest]
+    A --> B["Pytest"]
 
-    B --> C[Authentication Tests]
+    B --> C["Authentication Tests"]
 
-    B --> D[Health Tests]
+    B --> D["Health Tests"]
 
-    B --> E[Paste CRUD Tests]
+    B --> E["Paste CRUD Tests"]
 
-    B --> F[Authorization Tests]
+    B --> F["Authorization Tests"]
 
-    B --> G[Visibility Tests]
+    B --> G["Visibility Tests"]
 
-    B --> H[Expiration Tests]
+    B --> H["Expiration Tests"]
 
-    B --> I[Pagination Tests]
+    B --> I["Pagination Tests"]
 
-    C --> J[Test Database]
+    C --> J[("Test Database")]
 
     D --> J
 
@@ -750,27 +749,27 @@ GitHub Actions provides continuous integration.
 ```mermaid
 flowchart LR
 
-    A[Developer]
+    A["Developer"]
 
-    A --> B[Git Push / Pull Request]
+    A --> B["Git Push / Pull Request"]
 
-    B --> C[GitHub Repository]
+    B --> C["GitHub Repository"]
 
-    C --> D[GitHub Actions]
+    C --> D["GitHub Actions"]
 
-    D --> E[Checkout Code]
+    D --> E["Checkout Code"]
 
-    E --> F[Setup Python Environment]
+    E --> F["Setup Python Environment"]
 
-    F --> G[Install Dependencies]
+    F --> G["Install Dependencies"]
 
-    G --> H[Run Pytest]
+    G --> H["Run Pytest"]
 
-    H --> I{Tests Pass?}
+    H --> I{"Tests Pass?"}
 
-    I -->|Yes| J[CI Success]
+    I -->|Yes| J["CI Success"]
 
-    I -->|No| K[CI Failure]
+    I -->|No| K["CI Failure"]
 ```
 
 ### CI Responsibilities
@@ -792,37 +791,37 @@ The complete system can be represented as:
 ```mermaid
 flowchart TD
 
-    USER[User]
+    USER["User"]
 
     subgraph Client
-        BROWSER[Web Browser]
-        REACT[React Frontend]
+        BROWSER["Web Browser"]
+        REACT["React Frontend"]
     end
 
     subgraph Backend
-        API[Flask REST API]
-        AUTH[JWT Authentication]
-        ROUTES[API Routes]
-        LOGIC[Application Logic]
-        ORM[SQLAlchemy ORM]
+        API["Flask REST API"]
+        AUTH["JWT Authentication"]
+        ROUTES["API Routes"]
+        LOGIC["Application Logic"]
+        ORM["SQLAlchemy ORM"]
     end
 
     subgraph Database
-        PG[(PostgreSQL)]
-        VOL[(Persistent Volume)]
+        PG[("PostgreSQL")]
+        VOL[("Persistent Volume")]
     end
 
     subgraph Migration
-        MIGRATE[Flask-Migrate / Alembic]
+        MIGRATE["Flask-Migrate / Alembic"]
     end
 
     subgraph Testing
-        PYTEST[Pytest]
-        TESTDB[Test Database]
+        PYTEST["Pytest"]
+        TESTDB[("Test Database")]
     end
 
     subgraph CI
-        ACTIONS[GitHub Actions]
+        ACTIONS["GitHub Actions"]
     end
 
     USER --> BROWSER
@@ -976,35 +975,35 @@ The security model can be summarized as:
 ```mermaid
 flowchart TD
 
-    A[Client Request]
+    A["Client Request"]
 
-    A --> B{Protected Endpoint?}
+    A --> B{"Protected Endpoint?"}
 
-    B -->|No| C[Process Public Request]
+    B -->|No| C["Process Public Request"]
 
-    B -->|Yes| D{JWT Present?}
+    B -->|Yes| D{"JWT Present?"}
 
-    D -->|No| E[401 Unauthorized]
+    D -->|No| E["401 Unauthorized"]
 
-    D -->|Yes| F[Validate JWT]
+    D -->|Yes| F["Validate JWT"]
 
-    F --> G{Token Valid?}
+    F --> G{"Token Valid?"}
 
     G -->|No| E
 
-    G -->|Yes| H{Ownership Required?}
+    G -->|Yes| H{"Ownership Required?"}
 
-    H -->|No| I[Process Request]
+    H -->|No| I["Process Request"]
 
-    H -->|Yes| J{User Owns Resource?}
+    H -->|Yes| J{"User Owns Resource?"}
 
-    J -->|No| K[403 Forbidden]
+    J -->|No| K["403 Forbidden"]
 
     J -->|Yes| I
 
     C --> I
 
-    I --> L[Return Response]
+    I --> L["Return Response"]
 ```
 
 ---
@@ -1035,23 +1034,23 @@ A potential production deployment can evolve toward:
 ```mermaid
 flowchart TD
 
-    USER[Users]
+    USER["Users"]
 
-    USER --> CDN[CDN / Static Assets]
+    USER --> CDN["CDN / Static Assets"]
 
-    USER --> PROXY[HTTPS Reverse Proxy]
+    USER --> PROXY["HTTPS Reverse Proxy"]
 
-    PROXY --> FRONTEND[Frontend]
+    PROXY --> FRONTEND["Frontend"]
 
-    PROXY --> BACKEND[Flask API]
+    PROXY --> BACKEND["Flask API"]
 
-    BACKEND --> DB[(Managed PostgreSQL)]
+    BACKEND --> DB[("Managed PostgreSQL")]
 
-    BACKEND --> CACHE[(Redis Cache)]
+    BACKEND --> CACHE[("Redis Cache")]
 
-    CI[GitHub Actions] --> REGISTRY[Container Registry]
+    CI["GitHub Actions"] --> REGISTRY["Container Registry"]
 
-    REGISTRY --> DEPLOY[Production Environment]
+    REGISTRY --> DEPLOY["Production Environment"]
 
     DEPLOY --> BACKEND
     DEPLOY --> FRONTEND
