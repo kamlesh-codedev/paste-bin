@@ -1,6 +1,6 @@
 # PasteVault
 
-[![CI Build](https://github.com/YOUR_USERNAME/paste-bin/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/paste-bin/actions)
+[![CI Build](https://github.com/YOUR_USERNAME/paste-bin/actions/workflows/ci.yml/badge.svg)](https://github.com/kamlesh-codedev/paste-bin/actions)
 [![License: Custom](https://img.shields.io/badge/License-Challenge-blue.svg)](#license)
 
 > A full-stack, containerized Pastebin-style platform for creating, storing, managing, and securely sharing text and code snippets.
@@ -500,7 +500,7 @@ It documents:
 
 ### API Documentation
 
-👉 **[View Complete API Documentation](docs/API_DOCUMENTATION.md)**
+👉 **[View Complete API Documentation](https://github.com/kamlesh-codedev/paste-bin/blob/main/docks/API_DOCUMENTATION.md)**
 
 ### API Base URL
 
