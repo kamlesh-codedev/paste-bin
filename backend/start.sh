@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Running database migrations..."
 flask --app run.py db upgrade
 
-exec gunicorn --bind 0.0.0.0:${PORT} run:app
+echo "Starting PasteVault..."
+exec gunicorn --bind 0.0.0.0:${PORT:-5000} run:app
