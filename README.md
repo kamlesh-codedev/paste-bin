@@ -241,7 +241,7 @@ Docker Compose is the recommended method for running the complete PasteVault app
 ## 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/kamlesh-codedev/paste-bin
 cd paste-bin
 ```
 

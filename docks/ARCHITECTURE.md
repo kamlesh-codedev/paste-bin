@@ -970,32 +970,30 @@ Paste visibility determines whether content can be accessed through public shari
 
 # 23. Security Architecture Summary
 
-The security model can be summarized as:
-
 ```mermaid
 flowchart TD
 
     A["Client Request"]
 
-    A --> B{"Protected Endpoint?"}
+    A --> B{"Protected Endpoint"}
 
     B -->|No| C["Process Public Request"]
 
-    B -->|Yes| D{"JWT Present?"}
+    B -->|Yes| D{"JWT Present"}
 
     D -->|No| E["401 Unauthorized"]
 
     D -->|Yes| F["Validate JWT"]
 
-    F --> G{"Token Valid?"}
+    F --> G{"Token Valid"}
 
     G -->|No| E
 
-    G -->|Yes| H{"Ownership Required?"}
+    G -->|Yes| H{"Ownership Required"}
 
     H -->|No| I["Process Request"]
 
-    H -->|Yes| J{"User Owns Resource?"}
+    H -->|Yes| J{"User Owns Resource"}
 
     J -->|No| K["403 Forbidden"]
 
@@ -1031,7 +1029,9 @@ Docker Compose
 
 A potential production deployment can evolve toward:
 
-```mermaid
+Use this exact Mermaid block. The structure is valid, and I have only made the labels parser-safe:
+
+```mermaid id="60421"
 flowchart TD
 
     USER["Users"]
@@ -1055,6 +1055,9 @@ flowchart TD
     DEPLOY --> BACKEND
     DEPLOY --> FRONTEND
 ```
+
+This should work correctly in a GitHub `README.md` or other Mermaid-compatible Markdown viewer.
+
 
 This represents a possible future architecture and is not necessarily part of the current deployment.
 

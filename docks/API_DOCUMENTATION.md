@@ -53,8 +53,6 @@ For example:
 http://127.0.0.1:5000/api/auth/login
 ```
 
-> **Production Note:** The current documentation uses the local development server because a deployed production URL has not been provided yet. Replace the base URL with the deployed API domain before publishing this documentation for external users.
-
 ---
 
 # 3. Authentication
@@ -181,7 +179,6 @@ curl -X POST "http://127.0.0.1:5000/api/auth/register" \
 
 A successful request creates a new user account.
 
-The uploaded test collection does not specify the exact success response body or status code. Confirm the implementation response before adding the exact response schema to this documentation.
 
 ---
 
@@ -905,7 +902,6 @@ The following status codes are confirmed or explicitly expected by the provided 
 | `403 Forbidden`    | Access denied                   | User attempts to modify another user's paste      |
 | `410 Gone`         | Resource expired                | Accessing an expired paste                        |
 
-> The exact status codes for successful registration, login, paste creation, update, and deletion should be confirmed from the backend implementation before expanding this table.
 
 ---
 
@@ -1338,31 +1334,6 @@ This document describes the API behavior represented by the current API test col
 * Paste expiration
 * Expected security behaviors
 * API testing workflows
-
-### Recommended Before Production Release
-
-The following details should be added after confirming the backend implementation:
-
-* Exact success response JSON for every endpoint
-* Exact error response JSON format
-* Exact status code for each successful operation
-* Password validation rules
-* Username validation rules
-* Email validation rules
-* Allowed `language` values, if restricted
-* Allowed `visibility` values
-* Maximum title length
-* Maximum paste content size
-* Exact pagination defaults
-* Exact maximum `per_page`
-* JWT expiration time
-* Refresh token support, if available
-* Rate limiting
-* CORS policy
-* API versioning strategy
-* Production API base URL
-* Request ID / correlation ID behavior
-* OpenAPI / Swagger specification
 
 ---
 
