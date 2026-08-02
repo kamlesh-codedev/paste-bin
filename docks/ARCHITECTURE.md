@@ -968,45 +968,7 @@ Paste visibility determines whether content can be accessed through public shari
 
 ---
 
-# 23. Security Architecture Summary
-
-```mermaid
-flowchart TD
-
-    A["Client Request"]
-
-    A --> B{"Protected Endpoint"}
-
-    B -->|No| C["Process Public Request"]
-
-    B -->|Yes| D{"JWT Present"}
-
-    D -->|No| E["401 Unauthorized"]
-
-    D -->|Yes| F["Validate JWT"]
-
-    F --> G{"Token Valid"}
-
-    G -->|No| E
-
-    G -->|Yes| H{"Ownership Required"}
-
-    H -->|No| I["Process Request"]
-
-    H -->|Yes| J{"User Owns Resource"}
-
-    J -->|No| K["403 Forbidden"]
-
-    J -->|Yes| I
-
-    C --> I
-
-    I --> L["Return Response"]
-```
-
----
-
-# 24. Deployment Architecture
+# 23. Deployment Architecture
 
 The current project is designed around a containerized architecture.
 
@@ -1024,46 +986,9 @@ Docker Compose
        │
        └── PostgreSQL Database
 ```
-
-### Future Production Architecture
-
-A potential production deployment can evolve toward:
-
-Use this exact Mermaid block. The structure is valid, and I have only made the labels parser-safe:
-
-```mermaid id="60421"
-flowchart TD
-
-    USER["Users"]
-
-    USER --> CDN["CDN / Static Assets"]
-
-    USER --> PROXY["HTTPS Reverse Proxy"]
-
-    PROXY --> FRONTEND["Frontend"]
-
-    PROXY --> BACKEND["Flask API"]
-
-    BACKEND --> DB[("Managed PostgreSQL")]
-
-    BACKEND --> CACHE[("Redis Cache")]
-
-    CI["GitHub Actions"] --> REGISTRY["Container Registry"]
-
-    REGISTRY --> DEPLOY["Production Environment"]
-
-    DEPLOY --> BACKEND
-    DEPLOY --> FRONTEND
-```
-
-This should work correctly in a GitHub `README.md` or other Mermaid-compatible Markdown viewer.
-
-
-This represents a possible future architecture and is not necessarily part of the current deployment.
-
 ---
 
-# 25. Architecture Summary
+# 24. Architecture Summary
 
 PasteVault follows a modular full-stack architecture:
 
